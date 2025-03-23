@@ -1,0 +1,193 @@
+/* General Styling */
+.profile-page {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Banner */
+.profile-banner {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+}
+
+.profile-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Profile Info */
+.profile-info {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid #ff4500;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-pic:hover {
+    transform: scale(1.1);
+}
+
+.profile-details h2 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.profile-details p {
+    margin: 5px 0;
+    color: #666;
+}
+
+/* Buttons */
+.edit-profile-btn, .logout-btn {
+    padding: 8px 12px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+.edit-profile-btn {
+    background: #0084ff;
+    color: white;
+}
+
+.edit-profile-btn:hover {
+    background: #005bb5;
+}
+
+.logout-btn {
+    background: #ff3b30;
+    color: white;
+}
+
+.logout-btn:hover {
+    background: #c62828;
+}
+
+/* Profile Tabs */
+.profile-tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    border-bottom: 2px solid #ddd;
+}
+
+.profile-tabs button {
+    flex: 1;
+    padding: 10px;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    color: #666;
+}
+
+.profile-tabs button:hover,
+.profile-tabs .active {
+    color: #ff4500;
+    border-bottom: 3px solid #ff4500;
+}
+
+/* Profile Content */
+.profile-content {
+    margin-top: 20px;
+}
+
+/* Video & Playlist Grid */
+.video-grid, .playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.video-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    background: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+.video-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.video-card p {
+    font-size: 0.9rem;
+    margin-top: 5px;
+    color: #333;
+}
+
+.video-card:hover {
+    transform: scale(1.05);
+}
+
+/* About Section */
+.about-section {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+}
+
+.about-section p {
+    margin: 5px 0;
+    color: #444;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-pic {
+        width: 80px;
+        height: 80px;
+    }
+
+    .edit-profile-btn, .logout-btn {
+        width: 100%;
+    }
+
+    .profile-tabs {
+        flex-direction: column;
+    }
+
+    .profile-tabs button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .video-grid, .playlist-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}

@@ -1,0 +1,131 @@
+/* VideoDescription.css */
+
+.video-description {
+    margin-top: 20px;
+    padding: 20px;
+    background: #1e1e1e;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.video-description-title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.uploader-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.channel-details {
+    display: flex;
+    align-items: center;
+}
+
+.channel-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.channel-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.channel-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.subscribers {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.subscribe-btn {
+    padding: 10px 20px;
+    background: #ff4757;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.subscribe-btn:hover {
+    background: #e8413a;
+}
+
+.video-stats {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.video-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.video-actions button {
+    padding: 10px 15px;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.video-actions button:hover {
+    background: #ff4757;
+}
+
+.video-description-text {
+    white-space: pre-wrap;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.video-links {
+    margin-top: 15px;
+}
+
+.video-links a {
+    display: block;
+    color: #1e90ff;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+.video-links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .uploader-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .subscribe-btn {
+        width: 100%;
+    }
+
+    .video-actions {
+        flex-wrap: wrap;
+    }
+
+    .video-actions button {
+        width: calc(50% - 5px);
+    }
+}

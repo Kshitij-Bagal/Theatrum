@@ -1,0 +1,113 @@
+/* Video Player Container */
+.video-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+  background-color: #121212;
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* Video Section */
+.vid-section {
+  width: clamp(725px, 70vw, 835px);
+}
+
+/* Video Player */
+.video-player {
+  width: 100%;
+  background-color: #000;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+video {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  justify-content: center;
+}
+
+button, select {
+  background: #ff4757;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s ease;
+}
+
+button:hover, select:hover {
+  background: #e84142;
+}
+
+/* Recommended Videos */
+.recommended-videos {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+
+/* Theater Mode */
+.theater-mode {
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.theater-mode .vid-section {
+  width: 100%;
+}
+
+.theater-mode .video-player {
+  max-width: 1200px;
+}
+
+.theater-mode .recommended-videos {
+  width: 90vw;
+  height: 250px;
+}
+
+.theater-mode .recommended-videos .video-card {
+  flex: 1;
+}
+
+/* Focus Mode (Dim Background) */
+.focus-mode-active .recommended-videos,
+.focus-mode-active .vid-section .video-description,
+.focus-mode-active .vid-section .comments-section {
+  opacity: 0.2;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 1120px) {
+  .video-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .vid-section {
+      width: 100%;
+  }
+
+  .recommended-videos {
+      max-width: 100%;
+  }
+}

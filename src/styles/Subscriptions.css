@@ -1,0 +1,15 @@
+/* Subscriptions.css */
+.subscriptions {
+    padding: 20px;
+    color: #fff;
+}
+
+.subscriptions h1 {
+    font-size: 2rem;
+    color: #ff4757;
+}
+
+.subscriptions p {
+    font-size: 1.2rem;
+    color: #aaa;
+}

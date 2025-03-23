@@ -1,0 +1,234 @@
+/* General Styles */
+.channel {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Channel Banner */
+  .channel-banner {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  
+  .banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Channel Header */
+  .channel-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+  }
+  
+  .channel-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .channel-info h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .channel-info p {
+    font-size: 14px;
+    color: #666;
+    margin: 4px 0;
+  }
+  
+  /* Channel Description */
+  .channel-description {
+    margin-top: 15px;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 8px;
+    color: black;
+  }
+  
+  .channel-description h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  /* Video List */
+  .channel-videos {
+    margin-top: 20px;
+  }
+  
+  .video-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+  }
+  
+  .video-card {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .video-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .video-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .video-card h3 {
+    font-size: 16px;
+    margin: 8px 0;
+  }
+  
+  .video-card p {
+    font-size: 13px;
+    color: #777;
+  }
+  
+  /* Channel Management Buttons */
+  .channel-management {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .edit-btn, .delete-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .edit-btn {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .edit-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .delete-btn:hover {
+    background-color: #b02a37;
+  }
+  
+  /* Delete Video Button */
+  .delete-video-btn {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .delete-video-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Create Channel Form */
+  .create-channel {
+    text-align: center;
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .create-channel h2 {
+    margin-bottom: 10px;
+  }
+  
+  .create-channel form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .create-channel input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .create-channel button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .create-channel button:hover {
+    background-color: #218838;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .channel-header {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .channel-info h1 {
+      font-size: 20px;
+    }
+  
+    .channel-logo {
+      width: 60px;
+      height: 60px;
+    }
+  
+    .video-list {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .channel {
+      padding: 15px;
+    }
+  
+    .channel-header {
+      padding: 15px 0;
+    }
+  
+    .video-list {
+      grid-template-columns: 1fr;
+    }
+  }
+  

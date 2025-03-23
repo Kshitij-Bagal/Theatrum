@@ -1,0 +1,112 @@
+/* Sidebar Styles */
+.sidebar {
+    width: 150px;
+    background: #1e1e1e;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease, left 0.3s ease;
+    justify-content: flex-start;
+    position: sticky; /* Removed 'sticky', using absolute */
+    top: 69px;
+    left: 0px; /* Initially hidden off-screen */
+    height: calc(100vh - 70px);
+    z-index: 100;
+    flex: 1;
+}
+
+/* Collapsed Sidebar */
+.collapsed {
+    width: 50px;
+    height: calc(100vh - 70px);
+
+}
+
+/* Toggle Button */
+.toggle-btn {
+    background: #ff4757;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #aaa;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-links a:hover {
+    background: #333;
+    color: #ff4757;
+}
+
+/* When Sidebar is Open */
+.sidebar {    
+    width: 150px;
+    left: 0; /* Move into the screen */
+}
+
+.sidebar.open + .page-content {
+    opacity: 0.5; /* Reduce opacity when sidebar is open */
+    pointer-events: none; /* Prevent interactions */
+    width: 150px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    /* Initially hide sidebar off-screen */
+
+    .open {
+        left: 0;
+        position: sticky; 
+        top: 0;/* Show sidebar when .open is added */
+        height: 100%;
+
+    }
+    
+    /* Collapsed Sidebar on mobile */
+    .collapsed {
+        width: 50px;
+    }
+
+    .nav-links a {
+        color: #000000;
+    }
+
+
+    /* Dim Background Effect when Sidebar is Open */
+    .sidebar.open ~ .page-content {
+        opacity: 0.3;
+        pointer-events: none; /* Prevent interaction with content */
+    }
+}
+
+/* Button for Mobile Sidebar in Header */
+.mobile-sidebar-btn {
+    background: #ff4757;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+}
