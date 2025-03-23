@@ -1,0 +1,1 @@
+import{j as r}from"./index-BLwjDCQM.js";function a(){return r.jsxs("div",{className:"library",children:[r.jsx("h1",{children:"Your Library"}),r.jsx("p",{children:"All your saved videos, playlists, and history appear here."})]})}export{a as default};
