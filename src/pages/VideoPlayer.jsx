@@ -84,7 +84,7 @@ function VideoPlayer() {
   if (!channel) return <div>Channel not found</div>;
   if (!video) return <div>Video not found</div>;
 
-  const videoUrl = `http://localhost:8000/stream-video/${video._id}.mp4`;
+  const videoUrl = `https://theatrum-server.onrender.com/stream-video/${video._id}.mp4`;
 
   return (
     <div className={`video-container ${theaterMode ? "theater-mode" : ""}`}>

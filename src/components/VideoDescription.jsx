@@ -24,7 +24,7 @@ function VideoDescription() {
     // Function to handle like/dislike
     const handleLikeDislike = async (type) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/videos/${videoId}/${type}`, {
+            const response = await fetch(`https://theatrum-server.onrender.com/api/videos/${videoId}/${type}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId: user._id })  // Replace with actual user ID

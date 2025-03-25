@@ -65,7 +65,7 @@ function Comments({ videoId }) {
         if (!newComment.trim()) return;
 
         try {
-            const response = await fetch(`http://localhost:8000/api/videos/${videoId}/comment`, {
+            const response = await fetch(`https://theatrum-server.onrender.com/api/videos/${videoId}/comment`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId, username, text: newComment })
@@ -81,7 +81,7 @@ function Comments({ videoId }) {
 
     const handleReply = async (commentId, replyText) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/videos/${videoId}/comment/${commentId}/reply`, {
+            const response = await fetch(`https://theatrum-server.onrender.com/api/videos/${videoId}/comment/${commentId}/reply`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId, username, text: replyText })
