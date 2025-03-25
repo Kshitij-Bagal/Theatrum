@@ -15,7 +15,7 @@ function Profile() {
         if (!user) {
             navigate("/login");
         } else {
-            fetch(`/api/users/${user._id}`)
+            fetch(`https://theatrum-server.onrender.com/api/users/${user._id}`)
                 .then((res) => res.json())
                 .then((data) => setProfileData(data))
                 .catch((err) => console.error("Error fetching profile:", err));

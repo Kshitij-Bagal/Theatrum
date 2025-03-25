@@ -1,44 +1,46 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+const baseUrl = 'https://theatrum-server.onrender.com';
+
 
 // Fetch all channels
 export const fetchChannels = createAsyncThunk('channels/fetchChannels', async () => {
-    const response = await axios.get('/api/channels');
+    const response = await axios.get(`${baseUrl}/api/channels`);
     return response.data;
 });
 
 // Create a new channel
 export const createChannel = createAsyncThunk('channels/createChannel', async (channelData) => {
-    const response = await axios.post('/api/channels', channelData);
+    const response = await axios.post(`${baseUrl}/api/channels`, channelData);
     return response.data;
 });
 
 // Update a channel
 export const updateChannel = createAsyncThunk('channels/updateChannel', async ({ id, updatedData }) => {
-    const response = await axios.put(`/api/channels/${id}`, updatedData);
+    const response = await axios.put(`${baseUrl}/ap//channels/${id}`, updatedData);
     return response.data;
 });
 
 // Delete a channel
 export const deleteChannel = createAsyncThunk('channels/deleteChannel', async (channelId) => {
-    await axios.delete(`/api/channels/${channelId}`);
+    await axios.delete(`${baseUrl}/api/channels/${channelId}`);
     return channelId;
 });
 
 // Subscribe to a channel
 export const subscribeChannel = createAsyncThunk('channels/subscribeChannel', async (channelId) => {
-    const response = await axios.post(`/api/channels/${channelId}/subscribe`);
+    const response = await axios.post(`${baseUrl}/api/channels/${channelId}/subscribe`);
     return response.data;
 });
 
 // Unsubscribe from a channel
 export const unsubscribeChannel = createAsyncThunk('channels/unsubscribeChannel', async (channelId) => {
-    const response = await axios.post(`/api/channels/${channelId}/unsubscribe`);
+    const response = await axios.post(`${baseUrl}/api/channels/${channelId}/unsubscribe`);
     return response.data;
 });
 //Fetch channels created by a specific user
 export const fetchUserChannels = createAsyncThunk('channels/fetchUserChannels', async (userId) => {
-    const response = await axios.get(`/api/channels/${userId}`);
+    const response = await axios.get(`${baseUrl}/api/channels/${userId}`);
     return response.data;
 });
 

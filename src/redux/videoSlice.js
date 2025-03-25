@@ -1,33 +1,34 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+const baseUrl = 'https://theatrum-server.onrender.com';
 
 // Fetch all videos
 export const fetchVideos = createAsyncThunk('videos/fetchVideos', async () => {
-    const response = await axios.get('/api/videos');
+    const response = await axios.get(`${baseUrl}/api/videos`);
     return response.data;
 });
 
 // Create a video
 export const createVideo = createAsyncThunk('videos/createVideo', async (videoData) => {
-    const response = await axios.post('/api/videos', videoData);
+    const response = await axios.post(`${baseUrl}/api/videos`, videoData);
     return response.data;
 });
 
 // Update a video
 export const updateVideo = createAsyncThunk('videos/updateVideo', async ({ id, updatedData }) => {
-    const response = await axios.put(`/api/videos/${id}`, updatedData);
+    const response = await axios.put(`${baseUrl}/api//videos/${id}`, updatedData);
     return response.data;
 });
 
 // Delete a video
 export const deleteVideo = createAsyncThunk('videos/deleteVideo', async (videoId) => {
-    await axios.delete(`/api/videos/${videoId}`);
+    await axios.delete(`${baseUrl}/api//videos/${videoId}`);
     return videoId;
 });
 
 // Like a video
 export const likeVideo = createAsyncThunk('videos/likeVideo', async (videoId) => {
-    const response = await axios.post(`/api/videos/${videoId}/like`);
+    const response = await axios.post(`${baseUrl}/api//videos/${videoId}/like`);
     return response.data;
 });
 

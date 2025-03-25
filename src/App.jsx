@@ -13,7 +13,7 @@ import UChannel from "./pages/UserChannel";
 const Home = lazy(() => import("./pages/Home"));
 const Browse = lazy(() => import("./pages/Browse"));
 const Subscriptions = lazy(() => import("./pages/Subscriptions"));
-const Library = lazy(() => import("./pages/Library"));
+const History = lazy(() => import("./pages/History"));
 const Upload = lazy(() => import("./pages/Upload"));
 const Profile = lazy(() => import("./pages/Profile"));
 const VideoPlayer = lazy(() => import("./pages/VideoPlayer"));
@@ -46,7 +46,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/browse/:type" element={<Browse />} />
                 <Route path="/subscriptions" element={<Subscriptions />} />
-                <Route path="/library" element={<Library />} />
+                <Route path="/History" element={<History />} />
                 <Route path="/upload" element={<Upload />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/:channelId/:videoId" element={<VideoPlayer />} />

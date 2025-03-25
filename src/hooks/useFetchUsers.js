@@ -4,7 +4,7 @@ const useFetchUsers = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const baseUrl = 'http://localhost:8000';
+    const baseUrl = 'https://theatrum-server.onrender.com';
 
     const fetchUsers = async () => {
         setLoading(true);

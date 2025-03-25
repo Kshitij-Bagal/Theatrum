@@ -10,7 +10,7 @@ function Subscriptions() {
 
         const fetchSubscriptions = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/subscriptions?userId=${user._id}`);
+                const response = await fetch(`https://theatrum-server.onrender.com/api/subscriptions?userId=${user._id}`);
                 const data = await response.json();
                 setSubscriptions(data);
             } catch (error) {

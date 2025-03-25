@@ -23,12 +23,12 @@
 
 /* When Sidebar is Collapsed */
 .sidebar.collapsed + .page-content {
-  width: calc(100% - 50px); /* Expand page content when sidebar is collapsed */
+  width: calc(100% - 100px); /* Expand page content when sidebar is collapsed */
   opacity: 1;
   pointer-events:all; /* Prevent interaction with content */
 
 }.sidebar + .page-content {
-  width: calc(100% - 200px); /* Expand page content when sidebar is collapsed */
+  width: calc(100% - 250px); /* Expand page content when sidebar is collapsed */
   opacity: 0.3;
   pointer-events: none; /* Prevent interaction with content */
 
@@ -85,7 +85,10 @@
     gap: 0px; /* Switch to column layout on smaller screens */
   }
   .main-content .sidebar{
-    width: 150px;
+    width: 200px;
+  }
+  .main-content .collapsed{
+    width: 70px;
   }
   .toggle-btn{
     width: 45px;
@@ -97,8 +100,7 @@
 
 @media (max-width: 458px) {
   .page-content {
-    width: 95%; /* Maximize space on very small screens */
-    margin: auto;
+    width: 75%; /* Maximize space on very small screens */
   }
 }
 

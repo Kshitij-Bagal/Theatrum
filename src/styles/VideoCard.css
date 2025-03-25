@@ -36,6 +36,7 @@
 .channel-avatar img {
     width: 65px;
     min-width: 35px;
+    max-width: 65px;
     height: auto;
     border-radius: 50%;
     object-fit: cover;
@@ -50,6 +51,7 @@
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
+    padding-left: 10px;
 }
 
 .video-title {

@@ -12,7 +12,7 @@ function Browse() {
     useEffect(() => {
         const fetchVideosByType = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/videos/types/${encodeURIComponent(type)}`);
+                const response = await fetch(`https://theatrum-server.onrender.com/api/videos/types/${encodeURIComponent(type)}`);
                 const data = await response.json();
 
                 if (response.ok) {

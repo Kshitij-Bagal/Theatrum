@@ -10,7 +10,7 @@ function Sidebar({ isMobileOpen, closeSidebar }) {
 
     useEffect(() => {
         if (window.innerWidth <= 512) {
-            setIsCollapsed(true); // Ensure it's collapsed on mobile
+            setIsCollapsed(true);
         }
     }, []);
 
@@ -24,13 +24,32 @@ function Sidebar({ isMobileOpen, closeSidebar }) {
             </button>
 
             <nav className="nav-links">
-                <Link to="/" title="Home" onClick={closeSidebar}>🏠 {isCollapsed ? '' : 'Home'}</Link>
-                <Link to="/browse" title="Browse" onClick={closeSidebar}>🔍 {isCollapsed ? '' : 'Browse'}</Link>
-                <Link to={`/user-channel/${userId}`} title="Channel" onClick={closeSidebar}>📺 {isCollapsed ? '' : 'Channel'}</Link>
-                <Link to="/library" title="Library" onClick={closeSidebar}>📚 {isCollapsed ? '' : 'Library'}</Link>
-                <Link to="/history" title="History" onClick={closeSidebar}>🕒 {isCollapsed ? '' : 'History'}</Link>
-                <Link to="/upload" title="Upload" onClick={closeSidebar}>⬆️ {isCollapsed ? '' : 'Upload'}</Link>
-                <Link to="/profile" title="Profile" onClick={closeSidebar}>👤 {isCollapsed ? '' : 'Profile'}</Link>
+                <Link to="/" title="Home" onClick={closeSidebar}>🏠   {isCollapsed ? '' : '    Home'}</Link>
+                <Link to={`/user-channel/${userId}`} title="You" onClick={closeSidebar}>📺   {isCollapsed ? '' : '   You'}</Link>
+                <Link to="/history" title="History" onClick={closeSidebar}>🕒   {isCollapsed ? '' : '   History'}</Link>
+                <Link to="/upload" title="Upload" onClick={closeSidebar}>⬆️   {isCollapsed ? '' : '    Upload'}</Link>
+                <Link to="/profile" title="Profile" onClick={closeSidebar}>👤   {isCollapsed ? '' : '    Profile'}</Link>
+
+                {/* Non-functional placeholders */}
+                <div className={` ${isCollapsed ? 'begone' : 'extra-link '}`}>
+                    <div className="divider" />
+                    <p className='nav-header'>{isCollapsed ? '' : '    Explore'}</p>
+                    <span className="disabled">🔥 {isCollapsed ? '' : '    Trending'}</span>
+                    <span className="disabled">🛒 {isCollapsed ? '' : '    Shopping'}</span>
+                    <span className="disabled">🎵 {isCollapsed ? '' : 'Music'}</span>
+                    <span className="disabled">🎥 {isCollapsed ? '' : 'Movies'}</span>
+                    <span className="disabled">📺 {isCollapsed ? '' : 'Live'}</span>
+                </div>
+                <div className={` ${isCollapsed ? 'begone' : 'extra-link '}`}>
+                    <div className="divider" />
+                    <p className="nav-header">{isCollapsed ? '' : 'More from Theatrum'}</p>
+                    <span className="disabled">🎬 {isCollapsed ? '' : 'Theatrum Studio'}</span>
+                    <span className="disabled">🎶 {isCollapsed ? '' : 'Theatrum Music'}</span>
+                </div>
+                <div className="divider" />
+                <Link to="/settings" title="Settings" onClick={closeSidebar}>⚙️ {isCollapsed ? '' : 'Settings'}</Link>
+                <span className="disabled">❓ {isCollapsed ? '' : 'Help'}</span>
+                <span className="disabled">📢 {isCollapsed ? '' : 'Send Feedback'}</span>
             </nav>
         </div>
     );

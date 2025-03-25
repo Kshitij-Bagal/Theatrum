@@ -44,6 +44,25 @@ function VideoPlayer() {
     };
   }, [video]);
 
+  // ✅ Store video in session history
+  useEffect(() => {
+    if (!video) return;
+
+    const watchedHistory = JSON.parse(sessionStorage.getItem("watchedVideos")) || [];
+    
+    // Check if video already exists in history
+    const isAlreadyWatched = watchedHistory.some((item) => item.id === videoId);
+    
+    if (!isAlreadyWatched) {
+      const newHistory = [
+        { id: videoId, title: video.title, timestamp: new Date().toLocaleString() },
+        ...watchedHistory
+      ];
+      
+      sessionStorage.setItem("watchedVideos", JSON.stringify(newHistory.slice(0, 10))); // Keep max 10 items
+    }
+  }, [video, videoId]);
+
   const seekVideo = (seconds) => {
     if (videoRef.current) videoRef.current.currentTime += seconds;
   };
@@ -64,16 +83,14 @@ function VideoPlayer() {
 
   if (!channel) return <div>Channel not found</div>;
   if (!video) return <div>Video not found</div>;
-  // console.log("Video Data:", video);
-  // console.log("Channel Data:", video.channelId);
-  
+
   const videoUrl = `http://localhost:8000/stream-video/${video._id}.mp4`;
 
   return (
     <div className={`video-container ${theaterMode ? "theater-mode" : ""}`}>
       <div className="vid-section">
         <div className="video-player">
-          <video ref={videoRef} src={videoUrl} controls autoPlay preload="metadata" style={{ width: "100%" }} />
+          <video ref={videoRef} src={videoUrl || video.url} controls autoPlay preload="metadata" style={{ width: "100%" }} />
 
           {/* Controls */}
           <div className="controls">
@@ -96,12 +113,9 @@ function VideoPlayer() {
 
       {/* Recommended Videos */}
       <div className="recommended-videos" style={{ flexDirection: theaterMode ? "row" : "column" }}>
-      {recommendedVideos.map((vid) => {
-        console.log("Video Data:", vid);
-        // console.log("Channel Data:", vid.channelId);
-        
-          return <VideoCard key={vid._id} video={vid} />
-        })}
+        {recommendedVideos.map((vid) => (
+          <VideoCard key={vid._id} video={vid} />
+        ))}
       </div>
     </div>
   );

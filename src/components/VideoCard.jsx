@@ -17,7 +17,7 @@ function VideoCard({ video }) {
                 <img src={video.thumbnailUrl} alt={video.title} className="thumbnail" />
                 <div className="card-content">
                     <div className="channel-avatar">
-                        <img src={video.channelId.logo || 'default-thumbnail.png'} alt="Channel Avatar" />
+                        <img src={video.channelId.logo || 'default-logo.png'} alt="Channel Avatar" />
                     </div>
                     <div className="video-info">
                         <h3 className="video-title">{video.title}</h3>

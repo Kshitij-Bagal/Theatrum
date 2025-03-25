@@ -25,6 +25,19 @@ function Header() {
         }
     };
 
+        // Dynamic search on every character entry
+        useEffect(() => {
+            if (searchQuery.trim()) {
+                navigate(`/search?q=${searchQuery}`);
+            } else if (location.pathname.startsWith("/search")) {
+                navigate("/"); // Redirect to home if query is empty
+            }
+            const searchHistory = JSON.parse(sessionStorage.getItem("searchHistory")) || [];
+            const newHistory = [{ query: searchQuery, timestamp: new Date().toLocaleString() }, ...searchHistory];
+            sessionStorage.setItem("searchHistory", JSON.stringify(newHistory.slice(0, 10))); // Keep max 10 items
+        }, [searchQuery, navigate, location.pathname]);
+    
+
     return (
         <header className="header">
             {isMobile && location.pathname === "/search" && (

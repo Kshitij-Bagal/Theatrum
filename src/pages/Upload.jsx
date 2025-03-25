@@ -61,7 +61,7 @@ function Upload() {
         formData.append('uploaderId', userId);
     
         try {
-            const response = await fetch('http://localhost:8000/upload', {
+            const response = await fetch('https://theatrum-server.onrender.com/upload', {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
                 body: formData,

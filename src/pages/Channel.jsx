@@ -15,7 +15,7 @@ function Channel() {
     useEffect(() => {
         const fetchChannel = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/channels/${id}`);
+                const response = await axios.get(`https://theatrum-server.onrender.com/api/channels/${id}`);
                 setChannel(response.data);
                 setLoading(false);
             } catch (err) {

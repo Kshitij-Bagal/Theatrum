@@ -8,7 +8,7 @@ const useFetchUserChannel = (userId) => {
   useEffect(() => {
     const fetchChannel = async () => {
       try {
-        const response = await fetch(`/api/channels/user/${userId}`);
+        const response = await fetch(`https://theatrum-server.onrender.com/api/channels/user/${userId}`);
         if (!response.ok) {
           if (response.status === 404) {
             console.log('user does not have channel kindly create one')
@@ -33,7 +33,7 @@ const useFetchUserChannel = (userId) => {
 
   const updateVideo = async (videoId, updatedData) => {
     try {
-      const response = await axios.put(`/api/videos/${videoId}`, updatedData);
+      const response = await axios.put(`https://theatrum-server.onrender.com/api/videos/${videoId}`, updatedData);
       return response.data;
     } catch (err) {
       setError(err.message);

@@ -22,7 +22,7 @@ function LoginSignup() {
             : formData; 
     
         try {
-            const url = isLogin ? '/api/users/login' : '/api/users/register';
+            const url = isLogin ? 'https://theatrum-server.onrender.com/api/users/login' : 'https://theatrum-server.onrender.com/api/users/register';
             console.log("Sending Payload:", payload); // Debugging line
     
             const response = await fetch(url, {

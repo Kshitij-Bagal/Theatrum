@@ -4,7 +4,7 @@ const useFetchVideos = () => {
     const [videos, setVideos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const baseUrl = 'http://localhost:8000';
+    const baseUrl = 'https://theatrum-server.onrender.com';
 
     const fetchVideos = async () => {
         setLoading(true);
@@ -17,6 +17,7 @@ const useFetchVideos = () => {
         } finally {
             setLoading(false);
         }
+    
     };
 
     const createVideo = async (videoData) => {

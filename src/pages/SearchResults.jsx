@@ -6,7 +6,7 @@ function SearchResults() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const query = searchParams.get("q") || "";
-    const baseUrl = 'http://localhost:8000';
+    const baseUrl = 'https://theatrum-server.onrender.com';
 
     const [videos, setVideos] = useState([]);
     const [channels, setChannels] = useState([]);
