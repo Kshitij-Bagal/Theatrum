@@ -1,1 +1,0 @@
-import{j as i}from"./index-BLwjDCQM.js";import{V as r}from"./VideoCard-C1McWVxo.js";function d({videos:o}){return i.jsx("div",{className:"video-list",children:o.length>0?o.map(s=>i.jsx(r,{video:s},s._id)):i.jsx("p",{children:"No videos found. Try uploading some!"})})}export{d as V};
