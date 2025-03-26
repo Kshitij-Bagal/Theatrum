@@ -1,0 +1,1 @@
+import{j as o}from"./index-CM61exEb.js";function s(){return o.jsxs("div",{className:"not-found",children:[o.jsx("h1",{children:"404"}),o.jsx("p",{children:"Oops! The page you’re looking for doesn’t exist."})]})}export{s as default};
