@@ -23,8 +23,8 @@
 
 /* Toggle Button */
 .toggle-btn {
-    background: #ff4757;
-    color: #fff;
+    background: #ffffff;
+    color: #717171;
     border: none;
     padding: 8px 12px;
     border-radius: 5px;
@@ -35,7 +35,7 @@
 }
 
 .toggle-btn:hover {
-    background: #e84142;
+    background: #d9d9d9;
 }
 
 /* Navigation Links */

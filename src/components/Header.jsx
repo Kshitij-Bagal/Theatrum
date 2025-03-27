@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { FaYoutube } from 'react-icons/fa'; // Import icons
 import { useSelector } from "react-redux";
 import "../styles/Header.css";
 
@@ -57,7 +58,7 @@ function Header() {
                 <button className="back-button" onClick={() => navigate(-1)}>⬅️</button>
             )}
 
-            <Link to="/" className="logo">🎬 YouTubeClone</Link>
+            <Link to="/" className="logo"><FaYoutube /> YouTubeClone</Link>
 
             {!isMobile ? (
                 <form className="search-bar" onSubmit={handleSearch}>

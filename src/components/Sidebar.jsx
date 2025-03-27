@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
+import { GiHamburgerMenu } from 'react-icons/gi'; // Import icons
+
 import '../styles/Sidebar.css';
 
 function Sidebar({ isMobileOpen, closeSidebar }) {
@@ -20,7 +22,7 @@ function Sidebar({ isMobileOpen, closeSidebar }) {
                 className="toggle-btn" 
                 onClick={() => setIsCollapsed(!isCollapsed)}
             >
-                {isCollapsed ? '➡️' : '⬅️'}
+                {isCollapsed ? <GiHamburgerMenu /> : <GiHamburgerMenu />}
             </button>
 
             <nav className="nav-links">

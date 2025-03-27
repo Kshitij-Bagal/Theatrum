@@ -55,7 +55,7 @@
 }
 
 .search-bar button:hover {
-    background: #e8413a;
+    scale: 1.1;
 }
 
 /* Profile & settings buttons */
