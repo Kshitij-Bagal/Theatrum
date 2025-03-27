@@ -30,7 +30,8 @@ body {
   min-height: 100vh;
   max-width: 1280px;
   margin: auto;
-background-color: darkslategrey;
+background-color: rgb(255, 255, 255);
+color: #1a1a1a;
 }
 
 h1 {

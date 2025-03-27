@@ -10,12 +10,13 @@ function Profile() {
     const navigate = useNavigate();
     const [profileData, setProfileData] = useState(null);
     const [activeTab, setActiveTab] = useState("videos");
+    const baseUrl = import.meta.env.VITE_SERVER_URL;
 
     useEffect(() => {
         if (!user) {
             navigate("/login");
         } else {
-            fetch(`https://theatrum-server.onrender.com/api/users/${user._id}`)
+            fetch(`${baseUrl}/api/users/${user._id}`)
                 .then((res) => res.json())
                 .then((data) => setProfileData(data))
                 .catch((err) => console.error("Error fetching profile:", err));

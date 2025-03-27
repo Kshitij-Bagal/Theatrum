@@ -4,13 +4,14 @@ import { useSelector } from 'react-redux';
 function Subscriptions() {
     const [subscriptions, setSubscriptions] = useState([]);
     const user = useSelector((state) => state.users.user);
-    
+    const baseUrl = import.meta.env.VITE_SERVER_URL;
+
     useEffect(() => {
         if (!user) return;
 
         const fetchSubscriptions = async () => {
             try {
-                const response = await fetch(`https://theatrum-server.onrender.com/api/subscriptions?userId=${user._id}`);
+                const response = await fetch(`${baseUrl}/api/subscriptions?userId=${user._id}`);
                 const data = await response.json();
                 setSubscriptions(data);
             } catch (error) {

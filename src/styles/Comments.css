@@ -4,8 +4,8 @@
     max-width: 1130px;
     margin: 20px auto;
     padding: 20px;
-    background: #1e1e1e;
-    color: #fff;
+    background: #ffffff;
+    color: #000000;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     font-family: 'Arial', sans-serif;
@@ -30,17 +30,18 @@ h3 {
 .add-comment input {
     flex: 1;
     padding: 12px;
-    border: 2px solid #ff4757;
+    border: none;
+    border-bottom: 1px solid #ff4757;
     border-radius: 5px;
-    background: #2b2b2b;
-    color: #fff;
+    background: #ffffff;
+    color: #000000;
     outline: none;
     font-size: 1rem;
-    transition: 0.3s ease;
+    transition: 0.1s ease;
 }
 
 .add-comment input:focus {
-    border-color: #e8413a;
+    border-bottom: 2.5px solid #ff4757;
 }
 
 .add-comment button {
@@ -64,7 +65,7 @@ h3 {
     border: 1px solid #333;
     border-radius: 10px;
     margin-bottom: 15px;
-    background: #2b2b2b;
+    background: #ffffff;
     transition: 0.3s ease-in-out;
 }
 
@@ -88,15 +89,16 @@ h3 {
     padding: 6px 12px;
     font-size: 14px;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     cursor: pointer;
-    background: #444;
-    color: #fff;
+    background: #ffffff;
+    color: #000000;
     transition: background 0.3s;
 }
 
 .comment-actions button:hover {
-    background: #ff4757;
+    background: #dfdfdf;
+    scale: 1.2;
 }
 
 /* Reply Form */

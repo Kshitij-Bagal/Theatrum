@@ -99,12 +99,13 @@
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    color: #666;
+    color: #000000;
 }
 
 .profile-tabs button:hover,
 .profile-tabs .active {
     color: #ff4500;
+    border: none;
     border-bottom: 3px solid #ff4500;
 }
 

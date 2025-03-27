@@ -6,6 +6,7 @@ function Comment({ comment, onReply, onLike, onDislike }) {
     const [showReplyForm, setShowReplyForm] = useState(false);
     const [replyText, setReplyText] = useState('');
 
+
     const handleReplySubmit = () => {
         if (replyText.trim()) {
             onReply(comment._id, replyText);
@@ -47,12 +48,13 @@ function Comments({ videoId }) {
     const user = useSelector((state) => state.users.user);
     const userId = user?._id;
     const username = user?.username;
+    const baseUrl = import.meta.env.VITE_SERVER_URL;
 
 
     useEffect(() => {
         if (!videoId) return;
     
-        fetch(`https://theatrum-server.onrender.com/api/videos/${videoId}/comments`)
+        fetch(`${baseUrl}/api/videos/${videoId}/comments`)
             .then((res) => {
                 if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
                 return res.json();
@@ -65,7 +67,7 @@ function Comments({ videoId }) {
         if (!newComment.trim()) return;
 
         try {
-            const response = await fetch(`https://theatrum-server.onrender.com/api/videos/${videoId}/comment`, {
+            const response = await fetch(`${baseUrl}/api/videos/${videoId}/comment`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId, username, text: newComment })
@@ -81,7 +83,7 @@ function Comments({ videoId }) {
 
     const handleReply = async (commentId, replyText) => {
         try {
-            const response = await fetch(`https://theatrum-server.onrender.com/api/videos/${videoId}/comment/${commentId}/reply`, {
+            const response = await fetch(`${baseUrl}/api/videos/${videoId}/comment/${commentId}/reply`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId, username, text: replyText })
@@ -90,7 +92,7 @@ function Comments({ videoId }) {
             if (!response.ok) throw new Error('Failed to add reply');
     
             // **Fetch updated comments from the server**
-            const updatedComments = await fetch(`https://theatrum-server.onrender.com/api/videos/${videoId}/comments`)
+            const updatedComments = await fetch(`${baseUrl}/api/videos/${videoId}/comments`)
                 .then(res => res.json());
     
             setComments(updatedComments); // **Update state with new comments**
@@ -102,7 +104,7 @@ function Comments({ videoId }) {
 
     const handleLike = async (commentId) => {
         try {
-            await fetch(`https://theatrum-server.onrender.com/api/videos/${videoId}/comment/${commentId}/like`, { method: 'POST' });
+            await fetch(`${baseUrl}/api/videos/${videoId}/comment/${commentId}/like`, { method: 'POST' });
             setComments((prev) => prev.map((c) => (c._id === commentId ? { ...c, likes: c.likes + 1 } : c)));
         } catch (error) {
             console.error('Error liking comment:', error);
@@ -111,7 +113,7 @@ function Comments({ videoId }) {
 
     const handleDislike = async (commentId) => {
         try {
-            await fetch(`https://theatrum-server.onrender.com/api/videos/${videoId}/comment/${commentId}/dislike`, { method: 'POST' });
+            await fetch(`${baseUrl}/api/videos/${videoId}/comment/${commentId}/dislike`, { method: 'POST' });
             setComments((prev) => prev.map((c) => (c._id === commentId ? { ...c, dislikes: c.dislikes + 1 } : c)));
         } catch (error) {
             console.error('Error disliking comment:', error);

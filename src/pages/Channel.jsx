@@ -11,11 +11,13 @@ function Channel() {
     const [channel, setChannel] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const baseUrl = import.meta.env.VITE_SERVER_URL;
+
 
     useEffect(() => {
         const fetchChannel = async () => {
             try {
-                const response = await axios.get(`https://theatrum-server.onrender.com/api/channels/${id}`);
+                const response = await axios.get(`${baseUrl}/api/channels/${id}`);
                 setChannel(response.data);
                 setLoading(false);
             } catch (err) {

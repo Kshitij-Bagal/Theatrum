@@ -42,12 +42,13 @@ function Sidebar({ isMobileOpen, closeSidebar }) {
                 </div>
                 <div className={` ${isCollapsed ? 'begone' : 'extra-link '}`}>
                     <div className="divider" />
-                    <p className="nav-header">{isCollapsed ? '' : 'More from Theatrum'}</p>
-                    <span className="disabled">🎬 {isCollapsed ? '' : 'Theatrum Studio'}</span>
-                    <span className="disabled">🎶 {isCollapsed ? '' : 'Theatrum Music'}</span>
+                    <p className="nav-header">{isCollapsed ? '' : 'More from YouTubeClone'}</p>
+                    <span className="disabled">🎬 {isCollapsed ? '' : 'YouTubeClone Studio'}</span>
+                    <span className="disabled">🎶 {isCollapsed ? '' : 'YouTubeClone Music'}</span>
                 </div>
                 <div className="divider" />
-                <Link to="/settings" title="Settings" onClick={closeSidebar}>⚙️ {isCollapsed ? '' : 'Settings'}</Link>
+                {/* <Link to="/settings" title="Settings" onClick={closeSidebar}> {isCollapsed ? '' : 'Settings'}</Link> */}
+                <span className="disabled">⚙️ {isCollapsed ? '' : 'Settings'}</span>
                 <span className="disabled">❓ {isCollapsed ? '' : 'Help'}</span>
                 <span className="disabled">📢 {isCollapsed ? '' : 'Send Feedback'}</span>
             </nav>

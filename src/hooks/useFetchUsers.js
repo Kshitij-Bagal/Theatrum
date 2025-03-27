@@ -4,7 +4,7 @@ const useFetchUsers = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const baseUrl = 'https://theatrum-server.onrender.com';
+    const baseUrl = import.meta.env.VITE_SERVER_URL;
 
     const fetchUsers = async () => {
         setLoading(true);

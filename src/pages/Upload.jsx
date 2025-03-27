@@ -11,6 +11,7 @@ function Upload() {
     const [videoType, setVideoType] = useState('');
     const [uploading, setUploading] = useState(false);
     const user = useSelector((state) => state.users.user);
+    const baseUrl = import.meta.env.VITE_SERVER_URL;
 
     const videoTypes = [
         'Sci-Fi', 'Adventure', 'Sports', 'Healthcare', 'Anime', 'Cartoon', 
@@ -61,7 +62,7 @@ function Upload() {
         formData.append('uploaderId', userId);
     
         try {
-            const response = await fetch('https://theatrum-server.onrender.com/upload', {
+            const response = await fetch(`${baseUrl}/upload`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
                 body: formData,

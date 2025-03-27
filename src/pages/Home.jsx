@@ -7,6 +7,7 @@ import '../styles/Home.css';
 function Home() {
     const { videos, loading, error, fetchVideos } = useFetchVideos();
     const [videoTypes, setVideoTypes] = useState([]);
+    const baseUrl = import.meta.env.VITE_SERVER_URL;
 
     useEffect(() => {
         fetchVideos();
@@ -15,7 +16,7 @@ function Home() {
 
     const fetchVideoTypes = async () => {
         try {
-            const response = await fetch('https://theatrum-server.onrender.com/api/videos/get/types'); // ✅ Updated URL
+            const response = await fetch(`${baseUrl}/api/videos/get/types`); // ✅ Updated URL
             const data = await response.json();
             
             if (Array.isArray(data)) {

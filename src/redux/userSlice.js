@@ -1,16 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+const baseUrl = import.meta.env.VITE_SERVER_URL;
 
 // Fetch all users
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
-    const response = await axios.get('/api/users');
+    const response = await axios.get(`${baseUrl}/api/users`);
     return response.data;
 });
 
 // User login
 export const loginUser = createAsyncThunk('users/loginUser', async (loginData, { rejectWithValue }) => {
     try {
-        const response = await axios.post('/api/users/login', loginData);
+        const response = await axios.post(`${baseUrl}/api/users/login`, loginData);
         return response.data;
     } catch (error) {
         return rejectWithValue(error.response.data || 'Login failed');

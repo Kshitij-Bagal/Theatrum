@@ -12,6 +12,7 @@ function VideoDescription() {
             ?.flatMap((channel) => channel.videos)
             ?.find((v) => String(v._id) === videoId)
     );
+    const baseUrl = import.meta.env.VITE_SERVER_URL;
 
     const channel = useSelector((state) =>
         state.channel?.channels?.find((c) => c._id === video?.channelId)
@@ -21,10 +22,14 @@ function VideoDescription() {
     if (!channel) return <h2>Channel not found in description</h2>;
     const [videoData, setVideoData] = useState(video);
 
+    const handleSubscribtion = () => {
+        alert(`You have Subscribed To ${channel.title}`);
+    };
+
     // Function to handle like/dislike
     const handleLikeDislike = async (type) => {
         try {
-            const response = await fetch(`https://theatrum-server.onrender.com/api/videos/${videoId}/${type}`, {
+            const response = await fetch(`${baseUrl}/api/videos/${videoId}/${type}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId: user._id })  // Replace with actual user ID
@@ -50,7 +55,7 @@ function VideoDescription() {
                         <span className="subscribers">{channel.subscribers.toLocaleString()} subscribers</span>
                     </div>
                 </div>
-                <button className="subscribe-btn">Subscribe</button>
+                <button onClick={handleSubscribtion} className="subscribe-btn">Subscribe</button>
             </div>
 
             <div className="video-stats">

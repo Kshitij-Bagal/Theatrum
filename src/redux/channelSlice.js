@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-const baseUrl = 'https://theatrum-server.onrender.com';
+const baseUrl = import.meta.env.VITE_SERVER_URL;
 
 
 // Fetch all channels

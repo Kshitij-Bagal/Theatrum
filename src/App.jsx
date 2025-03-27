@@ -7,7 +7,6 @@ import ScrollToTop from "./components/ScrollToTop.jsx";
 import Sidebar from "./components/Sidebar";
 
 import "./App.css";
-import UChannel from "./pages/UserChannel";
 
 // Lazy-loaded pages
 const Home = lazy(() => import("./pages/Home"));
@@ -20,8 +19,9 @@ const VideoPlayer = lazy(() => import("./pages/VideoPlayer"));
 const Channel = lazy(() => import("./pages/Channel"));
 const LoginSignup = lazy(() => import("./pages/LoginSignup"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const UserChannel = lazy(() => import("./pages/UserChannel"));
+const UChannel = lazy(() => import("./pages/UserChannel"));
 const SearchResults = lazy(() => import("./pages/SearchResults"));
+const Settings= lazy(()=>import("./pages/Setting") )
 
 // Loading fallback component
 const Loading = () => <div className="loading">Loading...</div>;
@@ -32,7 +32,7 @@ function App() {
     dispatch(fetchVideos());
   }, [dispatch]);
   return (
-    <BrowserRouter basename="/Theatrum/">
+    <BrowserRouter basename="/YouTubeClone/">
       <ScrollToTop />
       <div className="app">
         <Header />
@@ -55,6 +55,7 @@ function App() {
                 <Route path="/login" element={<LoginSignup />} />
                 <Route path="/login-signup" element={<LoginSignup />} />
                 <Route path="/search" element={<SearchResults />} />
+                <Route path="/settings" element={<Settings />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

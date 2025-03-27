@@ -4,8 +4,8 @@
   flex-direction: row;
   gap: 20px;
   padding: 20px;
-  background-color: #121212;
-  color: #fff;
+  background-color: #ffffff;
+  color: #000000;
   min-height: 100vh;
 }
 
@@ -17,7 +17,7 @@
 /* Video Player */
 .video-player {
   width: 100%;
-  background-color: #000;
+  background-color: #ffffff;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -34,7 +34,7 @@ video {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.8);
   padding: 10px;
   border-radius: 8px;
   justify-content: center;
@@ -42,7 +42,7 @@ video {
 
 button, select {
   background: #ff4757;
-  color: white;
+  color: rgb(0, 0, 0);
   border: none;
   padding: 8px 12px;
   cursor: pointer;

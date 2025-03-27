@@ -9,6 +9,7 @@ function Header() {
     const navigate = useNavigate();
     const location = useLocation();
     const user = useSelector((state) => state.users.user);
+    let searchTimeout = null;
 
     useEffect(() => {
         const handleResize = () => {
@@ -22,21 +23,33 @@ function Header() {
         e.preventDefault();
         if (searchQuery.trim()) {
             navigate(`/search?q=${searchQuery}`);
+            saveSearchHistory(searchQuery);
         }
     };
 
-        // Dynamic search on every character entry
-        useEffect(() => {
-            if (searchQuery.trim()) {
-                navigate(`/search?q=${searchQuery}`);
-            } else if (location.pathname.startsWith("/search")) {
-                navigate("/"); // Redirect to home if query is empty
-            }
-            const searchHistory = JSON.parse(sessionStorage.getItem("searchHistory")) || [];
-            const newHistory = [{ query: searchQuery, timestamp: new Date().toLocaleString() }, ...searchHistory];
-            sessionStorage.setItem("searchHistory", JSON.stringify(newHistory.slice(0, 10))); // Keep max 10 items
-        }, [searchQuery, navigate, location.pathname]);
-    
+    // Function to save search history with debounce
+    const saveSearchHistory = (query) => {
+        if (!query.trim()) return;
+
+        const searchHistory = JSON.parse(sessionStorage.getItem("searchHistory")) || [];
+        if (searchHistory.length > 0 && searchHistory[0].query === query) return; // Avoid consecutive duplicates
+
+        const newHistory = [{ query, timestamp: new Date().toLocaleString() }, ...searchHistory];
+        sessionStorage.setItem("searchHistory", JSON.stringify(newHistory.slice(0, 10))); // Keep max 10 items
+    };
+
+    // Debounce search history saving (User must stop typing for 500ms)
+    useEffect(() => {
+        if (searchTimeout) clearTimeout(searchTimeout);
+
+        if (searchQuery.trim()) {
+            searchTimeout = setTimeout(() => {
+                saveSearchHistory(searchQuery); // Save only after delay
+            }, 500);
+        }
+
+        return () => clearTimeout(searchTimeout);
+    }, [searchQuery]);
 
     return (
         <header className="header">
@@ -44,7 +57,7 @@ function Header() {
                 <button className="back-button" onClick={() => navigate(-1)}>⬅️</button>
             )}
 
-            <Link to="/" className="logo">🎬 Theatrum</Link>
+            <Link to="/" className="logo">🎬 YouTubeClone</Link>
 
             {!isMobile ? (
                 <form className="search-bar" onSubmit={handleSearch}>

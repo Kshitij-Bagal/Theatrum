@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
-
 const useFetchVideos = () => {
     const [videos, setVideos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const baseUrl = 'https://theatrum-server.onrender.com';
-
+    const baseUrl = import.meta.env.VITE_SERVER_URL;
     const fetchVideos = async () => {
         setLoading(true);
         try {

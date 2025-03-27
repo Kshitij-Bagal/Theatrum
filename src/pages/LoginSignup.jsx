@@ -8,6 +8,7 @@ function LoginSignup() {
     const [formData, setFormData] = useState({ email: '', password: '', username: '' });
     const [errorMessage, setErrorMessage] = useState('');
     const dispatch = useDispatch();
+    const baseUrl = import.meta.env.VITE_SERVER_URL;
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,7 +23,7 @@ function LoginSignup() {
             : formData; 
     
         try {
-            const url = isLogin ? 'https://theatrum-server.onrender.com/api/users/login' : 'https://theatrum-server.onrender.com/api/users/register';
+            const url = isLogin ? `${baseUrl}/api/users/login` : `${baseUrl}/api/users/register`;
             console.log("Sending Payload:", payload); // Debugging line
     
             const response = await fetch(url, {

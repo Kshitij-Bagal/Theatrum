@@ -120,6 +120,10 @@ function UChannel() {
                     value={video.tags}
                     onChange={(e) => handleVideoChange(video._id, "tags", e.target.value)}
                   />
+                    <textarea
+                      value={video.description || ""}
+                      onChange={(e) => handleVideoChange(video._id, "description", e.target.value)}
+                    />
                   {/* Video Type Dropdown */}
                   <select
                     value={video.type}
