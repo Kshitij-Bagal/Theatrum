@@ -168,7 +168,7 @@ function VideoPlayer() {
       </div>
 
       {/* Recommended Videos */}
-      <div className="recommended-videos" style={{ flexDirection: theaterMode ? "row" : "column" }}>
+      <div className={`recommended-videos ${theaterMode ? "thmode": "normalmode"}`} style={{ flexDirection: theaterMode ? "row" : "column" }}>
         {recommendedVideos.map((vid) => (
           <VideoPlayerCard key={vid._id} video={vid} />        
           ))}

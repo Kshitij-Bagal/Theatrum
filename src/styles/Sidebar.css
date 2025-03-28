@@ -10,19 +10,19 @@
     justify-content: flex-start;
     position: sticky;
     top: 69px;
-    left: 0px; /* Initially hidden off-screen */
+    left: 0px;
     height: calc(100vh - 70px);
     z-index: 100;
-    flex: 1    
+    flex: 1;
 }
 
 /* Collapsed Sidebar */
-.collapsed {
+.sidebar.collapsed {
     width: 70px;
 }
 
 /* Toggle Button */
-.toggle-btn {
+.sidebar .toggle-btn {
     background: #ffffff;
     color: #717171;
     border: none;
@@ -34,12 +34,12 @@
     transition: background 0.3s;
 }
 
-.toggle-btn:hover {
+.sidebar .toggle-btn:hover {
     background: #d9d9d9;
 }
 
 /* Navigation Links */
-.nav-links {
+.sidebar .nav-links {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -47,20 +47,20 @@
     align-items: flex-start;
 }
 
-.nav-links a {
+.sidebar .nav-links a {
     text-decoration: none;
     color: #000000;
     border-radius: 5px;
     display: flex;
     align-items: flex-start;
-    width:calc(100% - 25px);
+    width: calc(100% - 25px);
     gap: 10px;
     transition: background 0.3s, color 0.3s;
     font-size: 16px;
     padding-left: 25px;
 }
 
-span {
+.sidebar span {
     text-align: start;
     width: 100%;
     padding-left: 25px;
@@ -68,52 +68,52 @@ span {
     transition: background 0.3s, color 0.3s;
 }
 
-span:hover,
-.nav-links a:hover,
-.nav-links a.active {
+.sidebar span:hover,
+.sidebar .nav-links a:hover,
+.sidebar .nav-links a.active {
     background: #dcdcdc;
     color: #ff4757;
 }
 
 /* Divider */
-.divider {
+.sidebar .divider {
     height: 5px;
     border-bottom: 1px solid rgba(134, 134, 134, 0.57);
     border-radius: 7px;
     position: relative;
-    left: -20px;
+    left: 0;
     width: 100%;
 }
 
-.collapsed .divider {
-    width: 110px;
+.sidebar.collapsed .divider {
+    width: 100px;
 }
 
 /* Hide elements when necessary */
-.begone {
+.sidebar .begone {
     display: none;
 }
 
 /* Navigation Header */
-.nav-header {
+.sidebar .nav-header {
     padding: 10px 0;
     margin: auto;
     width: 100%;
 }
 
 /* Adjust sidebar content alignment when collapsed */
-.collapsed .nav-links {
+.sidebar.collapsed .nav-links {
     height: 100%;
     justify-content: space-between;
 }
 
-.collapsed .nav-links a,
-.collapsed span {
+.sidebar.collapsed .nav-links a,
+.sidebar.collapsed span {
     width: calc(100% - 25px);
 }
 
 /* Extra Links Section */
-.extra-link {
+.sidebar .extra-link {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -133,44 +133,46 @@ span:hover,
 }
 
 /* Subscriptions Section */
-.subscriptions {
+.sidebar .subscriptions {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.subscriptions a {
+.sidebar .subscriptions a {
     display: flex;
     align-items: center;
     font-size: 0.9rem;
     padding-left: 15px;
 }
 
-.subscriptions a:hover {
+.sidebar .subscriptions a:hover {
     background: #292929;
 }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-    .open {
+    .sidebar.open {
         left: 0;
         position: sticky;
         top: 0;
         height: 100%;
     }
-    .collapsed{
+
+    .sidebar.collapsed {
         width: 70px;
     }
 
-    .collapsed .nav-links a,
-    .collapsed span {
+    .sidebar.collapsed .nav-links a,
+    .sidebar.collapsed span {
         width: 100%;
     }
-    .sidebar{
+
+    .sidebar {
         width: 70px;
     }
 
-    .disabled {
+    .sidebar .disabled {
         padding-left: 25px;
     }
 
@@ -182,13 +184,70 @@ span:hover,
         background-color: rgb(0, 0, 0);
     }
 
-    .collapsed .nav-links a {
+    .sidebar.collapsed .nav-links a {
         justify-content: start;
     }
 }
 
+@media (max-width: 456px) {
+    .sidebar.collapsed {
+        width: 100%;
+        height: 50px;
+        background: #ffffff;
+        z-index: 1000;
+        position: relative;
+        top: 0px;
+    }
+
+    .sidebar .toggle-btn {
+        position: relative;
+        top: 10px;
+        left: 10px;
+        z-index: 1100;
+    }
+    .sidebar{
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .sidebar.sidebar.collapsed .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 50px;
+        align-items: center;
+    }
+
+    .sidebar .nav-links:not(.hidden) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .sidebar .nav-links:not(.hidden) a {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        align-self: center;
+        justify-content: center;
+    }
+    .sidebar .extra-link{
+        display: flex;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        align-self: center;
+        justify-content: center;    
+    }
+
+    .sidebar .disabled{
+        text-align: center;
+        padding-left: 0px;
+    }
+}
+
 /* Mobile Sidebar Button */
-.mobile-sidebar-btn {
+.sidebar .mobile-sidebar-btn {
     background: #ff4757;
     color: white;
     border: none;

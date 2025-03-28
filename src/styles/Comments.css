@@ -1,8 +1,7 @@
 /* Comments Section */
 .comments-section {
-    width: clamp(280px, 90%, 1130px);
-    max-width: 1130px;
-    margin: 20px auto;
+    width: clamp(280px, 97%,100%);
+    margin: 20px 0;
     padding: 20px;
     background: #ffffff;
     color: #000000;

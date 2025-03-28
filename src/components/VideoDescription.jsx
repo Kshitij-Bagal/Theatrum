@@ -44,36 +44,39 @@ function VideoDescription() {
     return (
         <div className="video-description">
             <h2 className="video-description-title">{video.title}</h2>
-
-            <div className="uploader-info">
-                <div className="channel-details">
-                    <img src={channel.logo} alt={`${channel.name} Logo`} className="channel-logo" />
-                    <div className="channel-meta">
-                        <Link to={`/channel/${channel._id}`}>
-                            <h3 className="channel-name">{channel.name}</h3>
-                        </Link>
-                        <span className="subscribers">{channel.subscribers.toLocaleString()} subscribers</span>
+            <div className="disc-header">
+                <div className="uploader-info">
+                    <div className="channel-details">
+                        <img src={channel.logo} alt={`${channel.name} Logo`} className="channel-logo" />
+                        <div className="channel-meta">
+                            <Link to={`/channel/${channel._id}`}>
+                                <h3 className="channel-name">{channel.name}</h3>
+                            </Link>
+                            <span className="subscribers">{channel.subscribers.toLocaleString()} subscribers</span>
+                        </div>
                     </div>
+                    <button onClick={handleSubscribtion} className="subscribe-btn">Subscribe</button>
                 </div>
-                <button onClick={handleSubscribtion} className="subscribe-btn">Subscribe</button>
+                <div className="video-actions">
+                    <div className="like-dislike">
+                    <button className='like-btn' onClick={() => handleLikeDislike('like')}>
+                    👍 {videoData.likedBy?.length || 0}
+                    </button>
+                    <button className='dislike-btn' onClick={() => handleLikeDislike('dislike')}>
+                        👎 {videoData.dislikedBy?.length || 0}
+                    </button>
+                    </div>
+                    <button>🔗 Share</button>
+                    <button>⬇️ Download</button>
+                </div>            
             </div>
-
             <div className="video-stats">
                 <span>{video.views.toLocaleString()} views</span>
                 <span>{new Date(video.uploadDate).toDateString()}</span>
                 <span>#{video.tags?.join(' #')}</span>
             </div>
 
-            <div className="video-actions">
-                <button onClick={() => handleLikeDislike('like')}>
-                 👍 {videoData.likedBy?.length || 0}
-                </button>
-                <button onClick={() => handleLikeDislike('dislike')}>
-                    👎 {videoData.dislikedBy?.length || 0}
-                </button>
-                <button>🔗 Share</button>
-                <button>⬇️ Download</button>
-            </div>
+
 
             <div className="video-description-text">
                 <p>{video.description}</p>

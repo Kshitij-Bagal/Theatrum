@@ -1,6 +1,6 @@
 /* Root Styling */
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
   text-align: center;
 }
@@ -23,7 +23,7 @@
 
 /* When Sidebar is Collapsed */
 .sidebar.collapsed + .page-content {
-  width: calc(100% - 100px); /* Expand page content when sidebar is collapsed */
+  width: calc(100% - 70px); /* Expand page content when sidebar is collapsed */
   opacity: 1;
   pointer-events:all; /* Prevent interaction with content */
 }
@@ -100,9 +100,20 @@
   }
 }
 
-@media (max-width: 458px) {
+@media (max-width: 456px) {
+  .main-content {
+    flex-direction: column;
+    gap: 0px; /* Switch to column layout on smaller screens */
+    align-items: center;
+  }
   .page-content {
-    width: 75%; /* Maximize space on very small screens */
+    width: 100%; /* Maximize space on very small screens */
+  }
+  .sidebar.collapsed + .page-content, .sidebar + .page-content {
+    width: 100%; /* Expand page content when sidebar is collapsed */
+  }
+  .main-content .sidebar,.main-content .sidebar.collapsed{
+    width: 100%;
   }
 }
 

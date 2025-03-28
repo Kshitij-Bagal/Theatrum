@@ -12,11 +12,11 @@
     top: 0;
     height: 60px;
     z-index: 100;
-    width: clamp(250px, calc(100% - 10px), 1270px);
+    width: clamp(250px, calc(100% - 10px), 100%);
 }
 
 .logo {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     text-decoration: none;
     color: #ff0000;
     font-weight: bold;
@@ -110,18 +110,17 @@
 
     .search-bar {
         width: 40px;
-    }
+        position: relative;
+        left: -50px;    }
 
     .search-bar input {
-        width: 0;
-        padding: 0;
-        border: none;
-        visibility: hidden;
+        width: clamp(50px,25vw,40vw);
+
     }
 
     .search-bar button {
         padding: 5px;
-        font-size: 1.2rem;
+        font-size: 1rem;
         border-radius: 50%;
         width: 40px;
         height: 40px;

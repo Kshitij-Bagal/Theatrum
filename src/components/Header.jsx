@@ -58,7 +58,7 @@ function Header() {
                 <button className="back-button" onClick={() => navigate(-1)}>⬅️</button>
             )}
 
-            <Link to="/" className="logo"><FaYoutube /> YouTubeClone</Link>
+            <Link to="/" className="logo"><FaYoutube /> YouTube</Link>
 
             {!isMobile ? (
                 <form className="search-bar" onSubmit={handleSearch}>
