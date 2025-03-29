@@ -5,32 +5,32 @@ import { logoutUser } from "../redux/userSlice"; // Import logout action
 import "../styles/Profile.css";
 
 function Profile() {
-    const user = useSelector((state) => state.users.user);
+    const user = useSelector((state) => state.users.user); // Get logged-in user from Redux
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [profileData, setProfileData] = useState(null);
-    const [activeTab, setActiveTab] = useState("videos");
-    const baseUrl = import.meta.env.VITE_SERVER_URL;
+    const [activeTab, setActiveTab] = useState("videos"); // Manage active tab state
+    const baseUrl = import.meta.env.VITE_SERVER_URL; // API base URL from environment variables
 
     useEffect(() => {
         if (!user) {
-            navigate("/login");
+            navigate("/login"); // Redirect to login if user is not authenticated
         } else {
             fetch(`${baseUrl}/api/users/${user._id}`)
                 .then((res) => res.json())
-                .then((data) => setProfileData(data))
+                .then((data) => setProfileData(data)) // Store fetched profile data
                 .catch((err) => console.error("Error fetching profile:", err));
         }
     }, [user, navigate]);
 
     // Logout Function
     const handleLogout = () => {
-        dispatch(logoutUser()); // Clear user from Redux
-        localStorage.removeItem("userToken"); // Remove token from local storage
+        dispatch(logoutUser()); // Clear user state in Redux
+        localStorage.removeItem("userToken"); // Remove JWT token from local storage
         navigate("/login"); // Redirect to login page
     };
 
-    if (!profileData) return <p>Loading...</p>;
+    if (!profileData) return <p>Loading...</p>; // Show loading state while fetching data
 
     return (
         <div className="profile-page">
@@ -52,7 +52,7 @@ function Profile() {
                 <div className="profile-details">
                     <h2>{profileData.username}</h2>
                     <p>{profileData.email}</p>
-                    <p>{profileData.createdChannels?.length || 0} Channels</p>
+                    <p>{profileData.createdChannels?.length || 0} Channels</p> 
                 </div>
                 <button className="edit-profile-btn">Edit Profile</button>
                 <button className="logout-btn" onClick={handleLogout}>Logout</button>
@@ -82,6 +82,7 @@ function Profile() {
 
             {/* Tab Content */}
             <div className="profile-content">
+                {/* Videos Tab */}
                 {activeTab === "videos" && (
                     <div className="video-grid">
                         {profileData.favoriteVideos.length > 0 ? (
@@ -97,6 +98,7 @@ function Profile() {
                     </div>
                 )}
 
+                {/* Playlists Tab */}
                 {activeTab === "playlists" && (
                     <div className="playlist-grid">
                         {profileData.likedVideos.length > 0 ? (
@@ -112,6 +114,7 @@ function Profile() {
                     </div>
                 )}
 
+                {/* About Tab */}
                 {activeTab === "about" && (
                     <div className="about-section">
                         <p>Email: {profileData.email}</p>

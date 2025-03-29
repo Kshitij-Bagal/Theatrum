@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
 const useFetchUserChannel = (userId) => {
-  const [userChannel, setUserChannel] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const baseUrl = import.meta.env.VITE_SERVER_URL;
+  const [userChannel, setUserChannel] = useState(null); // Stores the user's channel data
+  const [loading, setLoading] = useState(true); // Tracks loading state
+  const [error, setError] = useState(null); // Stores error messages, if any
+  const baseUrl = import.meta.env.VITE_SERVER_URL; // Base URL for API requests
 
   useEffect(() => {
     const fetchChannel = async () => {
@@ -12,30 +12,31 @@ const useFetchUserChannel = (userId) => {
         const response = await fetch(`${baseUrl}/api/channels/user/${userId}`);
         if (!response.ok) {
           if (response.status === 404) {
-            console.log('user does not have channel kindly create one')
-            setUserChannel(null); // No channel, show form
-            return; // Exit to avoid setting error state
+            console.log("User does not have a channel, kindly create one.");
+            setUserChannel(null); // Set to null if no channel exists
+            return; // Exit function to prevent error state update
           }
           throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
-        
+
         const data = await response.json();
-        setUserChannel(data);
+        setUserChannel(data); // Store fetched channel data
       } catch (err) {
         console.error("Fetch Error:", err);
         setError(err.message);
       } finally {
-        setLoading(false);
+        setLoading(false); // Ensure loading state is false after fetch
       }
     };
 
     fetchChannel();
-  }, [userId]);
+  }, [userId]); // Re-fetch when userId changes
 
+  // Function to update video details
   const updateVideo = async (videoId, updatedData) => {
     try {
       const response = await axios.put(`${baseUrl}/api/videos/${videoId}`, updatedData);
-      return response.data;
+      return response.data; // Return updated video data
     } catch (err) {
       setError(err.message);
     }

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { FaEye, FaThumbsUp } from "react-icons/fa"; // Import icons
+import { FaEye, FaThumbsUp } from "react-icons/fa"; // Import icons for views and likes
 import "../styles/Browse.css";
 
 function Browse() {
-    const { type } = useParams(); // Get video type from URL
+    const { type } = useParams(); // Extracts the video type from the URL parameters
     const [videos, setVideos] = useState([]);
     const [channelData, setChannelData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const baseUrl = import.meta.env.VITE_SERVER_URL;
+    const baseUrl = import.meta.env.VITE_SERVER_URL; // Fetches the base URL from environment variables
 
     useEffect(() => {
         const fetchVideosByType = async () => {
@@ -24,10 +24,10 @@ function Browse() {
 
                 setVideos(data);
 
-                // Extract unique channel IDs
+                // Extract unique channel IDs from fetched videos
                 const uniqueChannelIds = [...new Set(data.map(video => video.channelId))];
 
-                // Fetch all channel details in parallel
+                // Fetch channel details only if there are unique IDs
                 if (uniqueChannelIds.length) fetchAllChannels(uniqueChannelIds);
             } catch (err) {
                 setError(err.message || "Error fetching videos");
@@ -41,11 +41,12 @@ function Browse() {
 
     const fetchAllChannels = async (channelIds) => {
         try {
+            // Fetch details for each channel in parallel using Promise.all
             const responses = await Promise.all(
                 channelIds.map(id => fetch(`${baseUrl}/api/channels/${id}`).then(res => res.json()))
             );
 
-            // Store all channel data in an object { channelId: channelData }
+            // Map channel IDs to their corresponding data
             const newChannelData = channelIds.reduce((acc, id, index) => {
                 acc[id] = responses[index];
                 return acc;
@@ -57,9 +58,9 @@ function Browse() {
         }
     };
 
-    // Video Card Component
+    // Video Card Component - Represents an individual video with its metadata
     const VideoPlayerCard = ({ video }) => {
-        const channel = channelData[video.channelId] || {}; // Get channel details
+        const channel = channelData[video.channelId] || {}; // Fetch channel details, fallback to empty object
 
         return (
             <div className="video-card">

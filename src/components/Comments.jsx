@@ -6,7 +6,6 @@ function Comment({ comment, onReply, onLike, onDislike }) {
     const [showReplyForm, setShowReplyForm] = useState(false);
     const [replyText, setReplyText] = useState('');
 
-
     const handleReplySubmit = () => {
         if (replyText.trim()) {
             onReply(comment._id, replyText);
@@ -50,9 +49,8 @@ function Comments({ videoId }) {
     const username = user?.username;
     const baseUrl = import.meta.env.VITE_SERVER_URL;
 
-
     useEffect(() => {
-        if (!videoId) return;
+        if (!videoId) return; // Prevent fetching if videoId is not available
     
         fetch(`${baseUrl}/api/videos/${videoId}/comments`)
             .then((res) => {
@@ -61,8 +59,8 @@ function Comments({ videoId }) {
             })
             .then((data) => setComments(data))
             .catch((err) => console.error("Error fetching comments:", err));
-    }, [videoId]);
-    
+    }, [videoId]); // Fetch comments when videoId changes
+
     const handleAddComment = async () => {
         if (!newComment.trim()) return;
 
@@ -88,23 +86,24 @@ function Comments({ videoId }) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId, username, text: replyText })
             });
-    
+
             if (!response.ok) throw new Error('Failed to add reply');
-    
-            // **Fetch updated comments from the server**
+
+            // Fetch updated comments from the server instead of manually modifying state
             const updatedComments = await fetch(`${baseUrl}/api/videos/${videoId}/comments`)
                 .then(res => res.json());
-    
-            setComments(updatedComments); // **Update state with new comments**
+
+            setComments(updatedComments); // Update state with new comments
         } catch (error) {
             console.error('Error adding reply:', error);
         }
     };
-    
 
     const handleLike = async (commentId) => {
         try {
             await fetch(`${baseUrl}/api/videos/${videoId}/comment/${commentId}/like`, { method: 'POST' });
+
+            // Optimistically update the comment likes without waiting for the server response
             setComments((prev) => prev.map((c) => (c._id === commentId ? { ...c, likes: c.likes + 1 } : c)));
         } catch (error) {
             console.error('Error liking comment:', error);
@@ -114,6 +113,8 @@ function Comments({ videoId }) {
     const handleDislike = async (commentId) => {
         try {
             await fetch(`${baseUrl}/api/videos/${videoId}/comment/${commentId}/dislike`, { method: 'POST' });
+
+            // Optimistically update the comment dislikes without waiting for the server response
             setComments((prev) => prev.map((c) => (c._id === commentId ? { ...c, dislikes: c.dislikes + 1 } : c)));
         } catch (error) {
             console.error('Error disliking comment:', error);

@@ -192,11 +192,11 @@
 @media (max-width: 456px) {
     .sidebar.collapsed {
         width: 100%;
-        height: 50px;
+        height: 60px;
         background: #ffffff;
         z-index: 1000;
-        position: relative;
-        top: 0px;
+        position: sticky;
+        top: 60px;
     }
 
     .sidebar .toggle-btn {
@@ -207,7 +207,11 @@
     }
     .sidebar{
         width: 100%;
-        overflow-x: scroll;
+        overflow-x: scroll;        
+        position: sticky;
+        top: 60px;
+
+
     }
     .sidebar.sidebar.collapsed .nav-links {
         display: none;

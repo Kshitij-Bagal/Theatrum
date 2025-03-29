@@ -1,14 +1,21 @@
 /* Channel.css */
 .channel {
-    color: #fff;
+    color: #000000;
     padding: 20px;
 }
 
+/* Responsive banner image */
 .channel-banner .banner-image {
     width: 100%;
     height: 300px;
     object-fit: cover;
     border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .channel-banner .banner-image {
+        height: 200px; /* Reduce height on smaller screens */
+    }
 }
 
 .channel-header {
@@ -18,8 +25,10 @@
     margin-top: 20px;
     padding: 10px 0;
     border-bottom: 1px solid #333;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
+/* Rotating animation for channel logo */
 @keyframes rotateY {
     0% {
       transform: rotateY(0deg);
@@ -32,17 +41,24 @@
       transform: rotateY(720deg);
       animation-duration: 3s; /* 50% slower */
     }
-  }
-  
-  .channel-logo {
-    width: 150px;
-    height: 150px;
+}
+
+.channel-logo {
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    margin-right: 80px;
-    border: 10px double red;
+    margin-right: 10px;
+    border: 8px double red;
     animation: rotateY 5s linear infinite;
-  }
-  
+}
+
+@media (max-width: 768px) {
+    .channel-logo {
+        width: 90px;
+        height: 90px;
+        margin-right: 8px;
+    }
+}
 
 .channel-info h1 {
     font-size: 1.8rem;
@@ -51,18 +67,19 @@
 
 .channel-info p {
     font-size: 1rem;
-    color: #aaa;
+    color: #000000;
     margin: 5px 0;
 }
 
 .subscribe-btn {
     background-color: #ff0000;
-    color: #fff;
+    color: #ffffff;
     padding: 10px 20px;
     border: none;
     border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 .subscribe-btn:hover {
@@ -80,25 +97,29 @@
 
 .channel-description p {
     font-size: 1.1rem;
-    color: #ccc;
+    color: #000000;
 }
 
+/* Video Section */
 .channel-videos {
     margin-top: 20px;
 }
 
+/* Video List with Responsive Grid */
 .video-list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    flex-wrap: wrap;
+    justify-content: center;
 }
 
+/* Video Card */
 .video-card {
-    width: 320px;
-    background: #222;
+    background: #efefef;
     padding: 10px;
     border-radius: 10px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
 }
 
 .video-card img {
@@ -107,15 +128,94 @@
 }
 
 .video-card h3 {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin: 10px 0 5px;
 }
 
 .video-card p {
     font-size: 0.9rem;
-    color: #aaa;
+    color: #666;
 }
 
 .video-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .channel {
+        padding: 10px;
+    }
+
+    .channel-info h1 {
+        font-size: 1.5rem;
+    }
+
+    .channel-info p {
+        font-size: 0.9rem;
+    }
+
+    .subscribe-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    .video-list {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .video-card {
+        padding: 8px;
+    }
+
+    .video-card h3 {
+        font-size: 0.9rem;
+    }
+
+    .video-card p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+    .channel-logo {
+        width: 80px;
+        height: 80px;
+        border: 5px double red;
+    }
+
+    .channel-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .channel-info h1 {
+        font-size: 1.3rem;
+        padding-top: 5px;
+    }
+
+    .channel-info p {
+        font-size: 0.8rem;
+    }
+
+    .subscribe-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .video-list {
+        grid-template-columns: 1fr;
+    }
+    .channel-description h2 {
+        font-size: 0.9rem;
+    }     
+    .channel-description p {
+        font-size: 0.7rem;
+    }    
+    .video-card p{
+        margin: 5px;
+    }
 }

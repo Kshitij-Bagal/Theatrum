@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 
 const useFetchChannels = () => {
-    const [channels, setChannels] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const baseUrl = import.meta.env.VITE_SERVER_URL;
+    const [channels, setChannels] = useState([]); // Store channel data
+    const [loading, setLoading] = useState(false); // Loading state
+    const [error, setError] = useState(null); // Error state
+    const baseUrl = import.meta.env.VITE_SERVER_URL; // Base URL from environment variables
 
+    // Fetch all channels from the server
     const fetchChannels = async () => {
         setLoading(true);
         try {
@@ -19,6 +20,7 @@ const useFetchChannels = () => {
         }
     };
 
+    // Create a new channel and update the state
     const createChannel = async (channelData) => {
         try {
             const response = await fetch(`${baseUrl}/api/channels`, {
@@ -27,12 +29,13 @@ const useFetchChannels = () => {
                 body: JSON.stringify(channelData),
             });
             const newChannel = await response.json();
-            setChannels((prev) => [...prev, newChannel]);
+            setChannels((prev) => [...prev, newChannel]); // Append new channel
         } catch (err) {
             setError(err.message);
         }
     };
 
+    // Update an existing channel
     const updateChannel = async (id, updatedData) => {
         try {
             const response = await fetch(`${baseUrl}/api/channels/${id}`, {
@@ -41,31 +44,34 @@ const useFetchChannels = () => {
                 body: JSON.stringify(updatedData),
             });
             const updatedChannel = await response.json();
-            setChannels((prev) => prev.map((ch) => (ch._id === id ? updatedChannel : ch)));
+            setChannels((prev) => prev.map((ch) => (ch._id === id ? updatedChannel : ch))); // Replace updated channel
         } catch (err) {
             setError(err.message);
         }
     };
 
+    // Delete a channel
     const deleteChannel = async (id) => {
         try {
             await fetch(`${baseUrl}/api/channels/${id}`, { method: 'DELETE' });
-            setChannels((prev) => prev.filter((ch) => ch._id !== id));
+            setChannels((prev) => prev.filter((ch) => ch._id !== id)); // Remove deleted channel
         } catch (err) {
             setError(err.message);
         }
     };
 
+    // Subscribe to a channel
     const subscribeToChannel = async (id) => {
         try {
             const response = await fetch(`${baseUrl}/api/channels/${id}/subscribe`, { method: 'POST' });
             const updatedChannel = await response.json();
-            setChannels((prev) => prev.map((ch) => (ch._id === id ? updatedChannel : ch)));
+            setChannels((prev) => prev.map((ch) => (ch._id === id ? updatedChannel : ch))); // Update channel subscribers
         } catch (err) {
             setError(err.message);
         }
     };
 
+    // Fetch channels when the component mounts
     useEffect(() => {
         fetchChannels();
     }, []);

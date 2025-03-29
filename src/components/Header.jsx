@@ -5,17 +5,20 @@ import { useSelector } from "react-redux";
 import "../styles/Header.css";
 
 function Header() {
-    const [searchQuery, setSearchQuery] = useState("");
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 460);
+    const [searchQuery, setSearchQuery] = useState(""); // State for search input
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 460); // State to track mobile view
+    const [isSearchExpanded, setIsSearchExpanded] = useState(false); // State to toggle search bar in mobile view
     const navigate = useNavigate();
     const location = useLocation();
     const user = useSelector((state) => state.users.user);
-    let searchTimeout = null;
+    let searchTimeout = null; // Timeout reference for debouncing search history
 
     useEffect(() => {
+        // Function to update isMobile state when window resizes
         const handleResize = () => {
             setIsMobile(window.innerWidth < 460);
         };
+
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
@@ -28,7 +31,11 @@ function Header() {
         }
     };
 
-    // Function to save search history with debounce
+    const toggleSearch = () => {
+        setIsSearchExpanded((prev) => !prev); // Toggle search bar visibility in mobile view
+    };
+
+    // Function to save search history with a limit of 10 items
     const saveSearchHistory = (query) => {
         if (!query.trim()) return;
 
@@ -45,7 +52,7 @@ function Header() {
 
         if (searchQuery.trim()) {
             searchTimeout = setTimeout(() => {
-                saveSearchHistory(searchQuery); // Save only after delay
+                saveSearchHistory(searchQuery);
             }, 500);
         }
 
@@ -54,13 +61,29 @@ function Header() {
 
     return (
         <header className="header">
+            {/* Back button for search page in mobile view */}
             {isMobile && location.pathname === "/search" && (
                 <button className="back-button" onClick={() => navigate(-1)}>⬅️</button>
             )}
 
             <Link to="/" className="logo"><FaYoutube /> YouTube</Link>
 
-            {!isMobile ? (
+            {/* Search bar: Adjusted for mobile and desktop views */}
+            {isMobile ? (
+                <div className={`mobile-search ${isSearchExpanded ? "expanded" : ""}`}>
+                    <button className="search-icon" onClick={toggleSearch}>🔍</button>
+                    {isSearchExpanded && (
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onBlur={() => setIsSearchExpanded(false)} // Collapse search bar when losing focus
+                            autoFocus
+                        />
+                    )}
+                </div>
+            ) : (
                 <form className="search-bar" onSubmit={handleSearch}>
                     <input
                         type="text"
@@ -70,16 +93,15 @@ function Header() {
                     />
                     <button type="submit">🔍</button>
                 </form>
-            ) : (
-                <div className="mobile-search" onClick={() => navigate("/search")}>
-                    <button className="search-icon">🔍</button>
-                </div>
             )}
 
+            {/* Header icons and user profile (hidden in mobile view) */}
             {!isMobile && (
                 <div className="header-icons">
-                    {user && <Link to="/upload" className="icon-button">⬆️</Link>}
-                    {user && <button className="icon-button">🔔</button>}
+                    {user && <Link to="/upload" className="icon-button">⬆️</Link>} {/* Upload button */}
+                    {user && <button className="icon-button">🔔</button>} {/* Notifications button */}
+
+                    {/* User profile: Display either profile image or initials */}
                     {user ? (
                         <div className="profile-icon" onClick={() => navigate("/profile")}>
                             {user.profileImg ? (

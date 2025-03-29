@@ -6,17 +6,17 @@ import { subscribeChannel } from '../redux/channelSlice';
 import '../styles/Channel.css';
 
 function Channel() {
-    const { id } = useParams();
-    const dispatch = useDispatch();
-    const [channel, setChannel] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const baseUrl = import.meta.env.VITE_SERVER_URL;
-
+    const { id } = useParams(); // Extract channel ID from URL parameters
+    const dispatch = useDispatch(); // Initialize Redux dispatch function
+    const [channel, setChannel] = useState(null); // State to store channel data
+    const [loading, setLoading] = useState(true); // State to manage loading state
+    const [error, setError] = useState(null); // State to store error messages
+    const baseUrl = import.meta.env.VITE_SERVER_URL; // Base API URL from environment variables
 
     useEffect(() => {
         const fetchChannel = async () => {
             try {
+                // Fetch channel data from API
                 const response = await axios.get(`${baseUrl}/api/channels/${id}`);
                 setChannel(response.data);
                 setLoading(false);
@@ -27,22 +27,23 @@ function Channel() {
         };
 
         fetchChannel();
-    }, [id]);
+    }, [id]); // Re-run effect when `id` changes
 
     if (loading) {
-        return <h2>Loading...</h2>;
+        return <h2>Loading...</h2>; // Show loading text while data is being fetched
     }
 
     if (error) {
-        return <h2>{error}</h2>;
+        return <h2>{error}</h2>; // Display error message if API call fails
     }
 
     if (!channel) {
-        return <h2>Channel not found</h2>;
+        return <h2>Channel not found</h2>; // Handle case when channel data is empty
     }
 
     return (
         <div className="channel">
+            {/* Display channel banner image */}
             <div className="channel-banner">
                 <img
                     src={channel.banner}
@@ -51,6 +52,7 @@ function Channel() {
                 />
             </div>
 
+            {/* Channel header with logo, name, subscribers, and subscribe button */}
             <div className="channel-header">
                 <img
                     src={channel.logo}
@@ -61,20 +63,23 @@ function Channel() {
                     <h1>{channel.name}</h1>
                     <p>{channel.subscribers.toLocaleString()} Subscribers</p>
                     <p>{channel.videos.length} Videos</p>
-                <button
-                    className="subscribe-btn"
-                    onClick={() => dispatch(subscribeChannel(channel.id))}
-                >
-                    Subscribe
-                </button>
+                    {/* Dispatch Redux action to subscribe to the channel */}
+                    <button
+                        className="subscribe-btn"
+                        onClick={() => dispatch(subscribeChannel(channel.id))}
+                    >
+                        Subscribe
+                    </button>
                 </div>
             </div>
 
+            {/* Section for channel description */}
             <div className="channel-description">
                 <h2>About this channel</h2>
                 <p>{channel.description}</p>
             </div>
 
+            {/* Display videos uploaded by the channel */}
             <div className="channel-videos">
                 <h2>Videos</h2>
                 <div className="video-list">

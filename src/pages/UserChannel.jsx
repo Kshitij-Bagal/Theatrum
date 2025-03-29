@@ -6,6 +6,7 @@ import { deleteVideo, updateVideo } from "../redux/videoSlice";
 import useFetchUserChannel from "../hooks/useFetchUserChannel";
 import "../styles/UserChannel.css";
 
+// List of video types used in the dropdown menu
 const videoTypes = [
   "Sci-Fi", "Adventure", "Sports", "Healthcare", "Anime", "Cartoon",
   "Politics", "News", "Entertainment", "Knowledge", "Gaming", "Movies",
@@ -18,12 +19,14 @@ const videoTypes = [
 ];
 
 function UChannel() {
-  const { userId } = useParams();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { userId } = useParams(); // Extract userId from the URL parameters
+  const navigate = useNavigate(); // Hook for programmatic navigation
+  const dispatch = useDispatch(); // Redux dispatch function
 
+  // Fetch the user's channel data
   const { userChannel, loading, error } = useFetchUserChannel(userId);
 
+  // Form state for channel details
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -31,8 +34,10 @@ function UChannel() {
     banner: "",
   });
 
-  const [videos, setVideos] = useState([]); // Store videos in state
+  // State to store the videos of the channel
+  const [videos, setVideos] = useState([]);
 
+  // Populate form fields and videos when the userChannel data is available
   useEffect(() => {
     if (userChannel) {
       setFormData({
@@ -42,14 +47,16 @@ function UChannel() {
         banner: userChannel.banner,
       });
 
-      setVideos(userChannel.videos || []); // Update video list
+      setVideos(userChannel.videos || []); // Ensure videos are set properly
     }
   }, [userChannel]);
 
+  // Handle input changes in the channel form
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle form submission for creating or updating a channel
   const handleSubmit = (e) => {
     e.preventDefault();
     if (userChannel) {
@@ -59,16 +66,19 @@ function UChannel() {
     }
   };
 
+  // Handle deleting the entire channel
   const handleDelete = () => {
     dispatch(deleteChannel(userChannel._id));
-    navigate("/");
+    navigate("/"); // Redirect to home after deletion
   };
 
+  // Handle deleting a specific video
   const handleDeleteVideo = (videoId) => {
     dispatch(deleteVideo(videoId));
-    setVideos(videos.filter((video) => video._id !== videoId)); // Remove from UI
+    setVideos(videos.filter((video) => video._id !== videoId)); // Remove deleted video from UI
   };
 
+  // Handle updating video details in local state
   const handleVideoChange = (videoId, field, value) => {
     setVideos((prevVideos) =>
       prevVideos.map((video) =>
@@ -77,11 +87,13 @@ function UChannel() {
     );
   };
 
+  // Dispatch update action for a specific video
   const handleUpdateVideo = (videoId) => {
     const videoToUpdate = videos.find((video) => video._id === videoId);
     dispatch(updateVideo({ id: videoId, updatedData: videoToUpdate }));
   };
 
+  // Show loading or error states if needed
   if (loading) return <h2>Loading...</h2>;
   if (error) return <h2>Error: {error}</h2>;
 
@@ -89,9 +101,12 @@ function UChannel() {
     <div className="channel">
       {userChannel ? (
         <>
+          {/* Channel Banner */}
           <div className="channel-banner">
             <img src={userChannel.banner} alt="Channel Banner" className="banner-image" />
           </div>
+
+          {/* Channel Header Section */}
           <div className="channel-header">
             <img src={userChannel.logo} alt="Channel Logo" className="channel-logo" />
             <div className="channel-info">
@@ -100,10 +115,14 @@ function UChannel() {
               <p>{videos.length} Videos</p>
             </div>
           </div>
+
+          {/* Channel Description */}
           <div className="channel-description">
             <h2>About this channel</h2>
             <p>{userChannel.description}</p>
           </div>
+
+          {/* Videos Section */}
           <div className="channel-videos">
             <h2>Videos</h2>
             <div className="video-list">
@@ -120,10 +139,10 @@ function UChannel() {
                     value={video.tags}
                     onChange={(e) => handleVideoChange(video._id, "tags", e.target.value)}
                   />
-                    <textarea
-                      value={video.description || ""}
-                      onChange={(e) => handleVideoChange(video._id, "description", e.target.value)}
-                    />
+                  <textarea
+                    value={video.description || ""}
+                    onChange={(e) => handleVideoChange(video._id, "description", e.target.value)}
+                  />
                   {/* Video Type Dropdown */}
                   <select
                     value={video.type}
@@ -147,6 +166,8 @@ function UChannel() {
               ))}
             </div>
           </div>
+
+          {/* Channel Management Buttons */}
           <div className="channel-management">
             <button onClick={handleSubmit} className="edit-btn">
               Edit Channel
@@ -157,6 +178,7 @@ function UChannel() {
           </div>
         </>
       ) : (
+        // Channel Creation Form
         <div className="create-channel">
           <h2>Create Your Channel</h2>
           <form onSubmit={handleSubmit}>

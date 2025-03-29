@@ -3,6 +3,7 @@ import '../styles/Upload.css';
 import { useSelector } from 'react-redux';
 
 function Upload() {
+    // State management for form fields
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -10,9 +11,13 @@ function Upload() {
     const [channelId, setChannelId] = useState('');
     const [videoType, setVideoType] = useState('');
     const [uploading, setUploading] = useState(false);
-    const user = useSelector((state) => state.users.user);
-    const baseUrl = import.meta.env.VITE_SERVER_URL;
+    const [progress, setProgress] = useState(0);
 
+    // Get logged-in user details from Redux store
+    const user = useSelector((state) => state.users.user);
+    const baseUrl = import.meta.env.VITE_SERVER_URL; // Fetching server URL from environment variables
+
+    // List of predefined video categories
     const videoTypes = [
         'Sci-Fi', 'Adventure', 'Sports', 'Healthcare', 'Anime', 'Cartoon', 
         'Politics', 'News', 'Entertainment', 'Knowledge', 'Gaming', 'Movies', 
@@ -24,9 +29,7 @@ function Upload() {
         'Family', 'Animation', 'Superhero', 'Spy'
     ];
 
-    const [progress, setProgress] = useState(0);
-
-    // File validation
+    // Validates and sets the uploaded file
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
         if (!selectedFile.type.startsWith('video/')) {
@@ -36,7 +39,9 @@ function Upload() {
         setFile(selectedFile);
     };
     
+    // Handles the video upload process
     const handleUpload = async () => {
+        // Ensures all required fields are filled before uploading
         if (!file || !title || !description || !channelId || !videoType) {
             return alert('All required fields must be filled!');
         }
@@ -44,6 +49,7 @@ function Upload() {
         setUploading(true);
         setProgress(0);
         
+        // Retrieves authentication token and user ID
         const token = sessionStorage.getItem('token');
         const userId = user?._id;
         if (!token || !userId) {
@@ -52,6 +58,7 @@ function Upload() {
             return;
         }
     
+        // Preparing the form data to send via POST request
         const formData = new FormData();
         formData.append('video', file);
         formData.append('title', title);
@@ -64,7 +71,7 @@ function Upload() {
         try {
             const response = await fetch(`${baseUrl}/upload`, {
                 method: 'POST',
-                headers: { 'Authorization': `Bearer ${token}` },
+                headers: { 'Authorization': `Bearer ${token}` }, // Sending authentication token
                 body: formData,
             });
     
@@ -83,10 +90,18 @@ function Upload() {
     return (
         <div className="upload-container">
             <h2>Upload Video</h2>
+
+            {/* Input fields for video metadata */}
             <input type="text" placeholder="Title *" value={title} onChange={(e) => setTitle(e.target.value)} required />
             <textarea placeholder="Description *" value={description} onChange={(e) => setDescription(e.target.value)} required />
-            <input className='upload-input' type="file" accept="video/*" onChange={(e) => setFile(e.target.files[0])} required />
+
+            {/* File input for video selection */}
+            <input className='upload-input' type="file" accept="video/*" onChange={handleFileChange} required />
+            
+            {/* Channel ID input */}
             <input className='upload-input' type="text" placeholder="Channel ID *" value={channelId} onChange={(e) => setChannelId(e.target.value)} required />
+
+            {/* Tags input for additional metadata */}
             <input className='upload-input' type="text" placeholder="Tags (comma-separated)" value={tags} onChange={(e) => setTags(e.target.value)} />
             
             {/* Video Type Dropdown */}
@@ -97,9 +112,12 @@ function Upload() {
                 ))}
             </select>
 
+            {/* Upload button with disabled state during uploading */}
             <button onClick={handleUpload} disabled={uploading}>
                 {uploading ? 'Uploading...' : 'Upload'}
             </button>
+
+            {/* Progress bar (if any progress is recorded) */}
             {progress > 0 && <progress value={progress} max="100"></progress>}
 
         </div>
